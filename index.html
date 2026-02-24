@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veetech | Tech Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        /* Additional styles for video and new sections */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Video Section Styles */
+        .video-section {
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, #f8f9fa, #ffffff);
+            text-align: center;
+        }
+
+        .video-section h2 {
+            color: #0a1f3a;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .video-section .subtitle {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background: #000;
+        }
+
+        .video-preview {
+            position: relative;
+            cursor: pointer;
+            display: block;
+        }
+
+        .video-preview img {
+            width: 100%;
+            display: block;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 31, 58, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .play-overlay i {
+            font-size: 4rem;
+            margin-bottom: 10px;
+        }
+
+        .play-overlay p {
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .video-preview:hover .play-overlay {
+            background: rgba(10, 31, 58, 0.9);
+        }
+
+        .custom-video-player {
+            width: 100%;
+            display: block;
+            max-height: 500px;
+        }
+
+        .video-controls {
+            background: #0a1f3a;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .video-btn {
+            background: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0a1f3a;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .video-btn:hover {
+            background: #ffcc00;
+            transform: scale(1.1);
+        }
+
+        .video-progress {
+            flex-grow: 1;
+            margin: 0 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress {
+            height: 100%;
+            background: #ffcc00;
+            width: 0%;
+            transition: width 0.1s;
+        }
+
+        .time-display {
+            color: white;
+            font-family: monospace;
+            font-size: 0.9rem;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .video-note {
+            margin-top: 20px;
+            color: #666;
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* Testimonials Styles */
+        .testimonials {
+            padding: 80px 20px;
+            background: #f8f9fa;
+            text-align: center;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-card .stars {
+            color: #FFD700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .customer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+
+        .customer span {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        /* Quick Booking Form */
+        .quick-booking {
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #0a1f3a 0%, #1a3a5f 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .quick-booking h2 {
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .booking-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .booking-form .button {
+            background: #ffcc00;
+            color: #0a1f3a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .booking-form .button:hover {
+            background: #e6b800;
+            transform: translateY(-2px);
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Enhanced Footer Styles */
+        .site-footer {
+            background: #0a1829;
+            color: white;
+            padding: 3rem 0 0;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-section h4 {
+            color: #ffcc00;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffcc00;
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: #ffcc00;
+            width: 20px;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: #ffcc00;
+            color: #0a1f3a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: #081220;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .changelog {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .changelog a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .changelog a:hover {
+            text-decoration: underline;
+        }
+
+        .changelog span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .copyright p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+            
+            .testimonial-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .video-section h2 {
+                font-size: 2rem;
+            }
+            
+            .video-controls {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px;
+            }
+            
+            .video-progress {
+                order: 3;
+                width: 100%;
+                margin: 10px 0;
+            }
+            
+            .testimonial-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .booking-form {
+                padding: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+            
+            .time-display {
+                font-size: 1rem;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Veetech</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero with Video Background -->
+        <section class="hero">
+            <video autoplay muted loop playsinline class="video-bg">
+                <source src="./assets/hero-video.mp4" type="video/mp4">
+                <!-- Fallback image -->
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Tech Background">
+            </video>
+            
+            <div class="hero-overlay"></div>
+            
+            <div class="hero- content">
+                <h2>Tech Solutions for Nigeria</h2>
+                <p>Phones • Laptops • Power Banks • Repairs</p>
+                <a href="services.html" class="button">Our Services</a>
+            </div>
+        </section>
+
+        <!-- NEW: Video Showcase Section -->
+        <section class="video-section">
+            <h2>See Our Work in Action</h2>
+            <p class="subtitle">Watch how we provide expert tech solutions and repairs for our customers</p>
+            
+            <div class="video-container">
+                <!-- Video Preview Thumbnail -->
+                <div class="video-preview" id="videoPreview">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&h=500&fit=crop" alt="Video Preview" id="previewImage">
+                    <div class="play-overlay">
+                        <i class="fas fa-play-circle"></i>
+                        <p>Click to watch our work</p>
+                    </div>
+                </div>
+                
+                <!-- Replace "showcase-video.mp4" with your actual video file -->
+                <video class="custom-video-player" id="showcaseVideo" preload="metadata" style="display: none;">
+                    <source src="./assets/showcase-video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                
+                <div class="video-controls" style="display: none;">
+                    <button class="video-btn" id="playPauseBtn" aria-label="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <div class="time-display">
+                        <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                    </div>
+                    
+                    <div class="video-progress">
+                        <div class="progress-bar" id="progressBar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                    </div>
+                    
+                    <button class="video-btn" id="muteBtn" aria-label="Mute/Unmute">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    
+                    <button class="video-btn" id="fullscreenBtn" aria-label="Fullscreen">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <p class="video-note">Watch our team at work - Video plays directly on our website</p>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="products">
+            <h2>Featured Products</h2>
+            <div class="product-grid">
+                <!-- Smartphones -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&h=600&fit=crop" alt="Smartphones" loading="lazy">
+                    <h3>Smartphones</h3>
+                    <p>Latest models | Affordable prices</p>
+                </div>
+                
+                <!-- Laptops -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800&h=600&fit=crop" alt="Laptops" loading="lazy">
+                    <h3>Laptops</h3>
+                    <p>Powerful performance | All brands</p>
+                </div>
+                
+                <!-- Power Banks -->
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop" alt="Power Banks" loading="lazy">
+                    <h3>Power Banks</h3>
+                    <p>High capacity | Fast charging</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- NEW: Testimonials Section -->
+        <section class="testimonials">
+            <h2>What Our Customers Say</h2>
+            <p class="subtitle">Trusted by hundreds of satisfied customers across Nigeria</p>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Veetech repaired my laptop in 2 hours! Professional and affordable."</p>
+                    <div class="customer">
+                        <strong>James O.</strong>
+                        <span>Lagos</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Best phone prices in town. Got my Samsung with 6 months warranty."</p>
+                    <div class="customer">
+                        <strong>Amina S.</strong>
+                        <span>Abuja</span>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Power bank repair was quick. Saved me from buying new one."</p>
+                    <div class="customer">
+                        <strong>Chukwuemeka</strong>
+                        <span>Enugu</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Preview -->
+        <section class="services">
+            <h2>Our Repair Services</h2>
+            <p class="subtitle">Fast, reliable, and professional repairs for all your devices.</p>
+            <div class="services-grid">
+                <div class="service">
+                    <img src="https://cdn-icons-png.flaticon.com/128/2972/2972385.png" width="60" alt="Phone Repair">
+                    <h3>Phone Repair</h3>
+                    <p>Screen replacement, battery, software issues.</p>
+                </div>
+                <div class="service">
+                    <img src="https://cdn-icons-png.flaticon.com/128/4193/4193319.png" width="60" alt="Laptop Repair">
+                    <h3>Laptop Repair</h3>
+                    <p>Hardware upgrade, virus removal, charging port.</p>
+                </div>
+                <div class="service">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3208/3208720.png" width="60" alt="Power Bank Repair">
+                    <h3>Power Bank Repair</h3>
+                    <p>Battery replacement, port fixing, circuit check.</p>
+                </div>
+                <div class="service">
+                    <img src="https://cdn-icons-png.flaticon.com/128/3050/3050525.png" width="60" alt="Gadgets Repair">
+                    <h3>Other Gadgets</h3>
+                    <p>Tablets, headphones, gaming consoles, etc.</p>
+                </div>
+            </div>
+            <a href="services.html" class="button">View All Services</a>
+        </section>
+
+        <!-- NEW: Quick Booking Form -->
+        <section class="quick-booking">
+            <h2>Book a Service Instantly</h2>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <select required>
+                        <option value="">Select Service</option>
+                        <option>Phone Repair</option>
+                        <option>Laptop Repair</option>
+                        <option>Phone Purchase</option>
+                        <option>Laptop Purchase</option>
+                        <option>Power Bank Repair</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="button">Book Now</button>
+            </form>
+        </section>
+
+        <!-- Contact CTA -->
+        <section class="contact-cta">
+            <h2>Need Tech Help? Contact Us Now!</h2>
+            <p>Call, visit, or message for quick assistance.</p>
+            <a href="contact.html" class="button">📞 0804436093</a>
+            <p class="email">Or email: info@veetech.com</p>
+        </section>
+
+        <!-- Enhanced Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Veetech</h3>
+                    <p>Your trusted partner for all tech solutions in Nigeria. Professional repairs and quality products.</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/234804436093" target="_blank" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li><a href="services.html">Phone Repairs</a></li>
+                        <li><a href="services.html">Laptop Repairs</a></li>
+                        <li><a href="products.html">Smartphone Sales</a></li>
+                        <li><a href="products.html">Laptop Sales</a></li>
+                        <li><a href="products.html">Power Banks</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Pricing</h4>
+                    <ul>
+                        <li><a href="services.html#pricing">Repair Services</a></li>
+                        <li><a href="products.html#pricing">Phone Prices</a></li>
+                        <li><a href="products.html#pricing">Laptop Prices</a></li>
+                        <li><a href="services.html#warranty">Warranty Info</a></li>
+                        <li><a href="services.html#discounts">Special Offers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-phone"></i> 0804 436 093</li>
+                        <li><i class="fas fa-envelope"></i> info@veetech.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</li>
+                        <li><i class="fas fa-clock"></i> Mon-Sat: 9am-7pm</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html#faq">FAQ</a></li>
+                        <li><a href="contact.html#support">Customer Support</a></li>
+                        <li><a href="report-bug.html">Report Bug</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="changelog">
+                        <a href="changelog.html">Changelog v2.0</a>
+                        <span>• Last updated: March 2024</span>
+                    </div>
+                    <div class="copyright">
+                        <p>&copy; 2024 Veetech Tech Solutions. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/234804436093" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="script.js"></script>
+    <script>
+        // Video Player Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const video = document.getElementById('showcaseVideo');
+            const videoPreview = document.getElementById('videoPreview');
+            const previewImage = document.getElementById('previewImage');
+            const videoControls = document.querySelector('.video-controls');
+            const playPauseBtn = document.getElementById('playPauseBtn');
+            const muteBtn = document.getElementById('muteBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            const currentTimeEl = document.getElementById('currentTime');
+            const durationEl = document.getElementById('duration');
+            const bookingForm = document.getElementById('bookingForm');
+            
+            // Video tracking
+            let videoViewed = false;
+            
+            // Format time in MM:SS
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            // Update time displays
+            function updateTime() {
+                currentTimeEl.textContent = formatTime(video.currentTime);
+                durationEl.textContent = formatTime(video.duration || 0);
+            }
+            
+            // Update progress bar
+            function updateProgress() {
+                const percent = (video.currentTime / video.duration) * 100;
+                progress.style.width = percent + '%';
+                updateTime();
+            }
+            
+            // Show video player
+            videoPreview.addEventListener('click', function() {
+                // Hide preview, show video and controls
+                videoPreview.style.display = 'none';
+                video.style.display = 'block';
+                videoControls.style.display = 'flex';
+                
+                // Play video
+                video.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                
+                // Track view
+                if (!videoViewed) {
+                    videoViewed = true;
+                    console.log('Video started playing - view counted');
+                }
+            });
+            
+            // Play/Pause
+            playPauseBtn.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                } else {
+                    video.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                }
+            });
+            
+            // Mute/Unmute
+            muteBtn.addEventListener('click', function() {
+                video.muted = !video.muted;
+                muteBtn.innerHTML = video.muted ? 
+                    '<i class="fas fa-volume-mute"></i>' : 
+                    '<i class="fas fa-volume-up"></i>';
+            });
+            
+            // Fullscreen
+            fullscreenBtn.addEventListener('click', function() {
+                if (!document.fullscreenElement) {
+                    video.requestFullscreen().catch(err => {
+                        console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                    });
+                } else {
+                    document.exitFullscreen();
+                }
+            });
+            
+            // Click on progress bar to seek
+            progressBar.addEventListener('click', function(e) {
+                const rect = progressBar.getBoundingClientRect();
+                const pos = (e.clientX - rect.left) / rect.width;
+                video.currentTime = pos * video.duration;
+            });
+            
+            // Update when video metadata is loaded
+            video.addEventListener('loadedmetadata', function() {
+                updateTime();
+            });
+            
+            // Update progress as video plays
+            video.addEventListener('timeupdate', updateProgress);
+            
+            // Reset play button when video ends
+            video.addEventListener('ended', function() {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            });
+            
+            // Spacebar to play/pause
+            document.addEventListener('keydown', function(e) {
+                if (e.code === 'Space' && document.activeElement !== video) {
+                    e.preventDefault();
+                    if (video.style.display !== 'none') {
+                        playPauseBtn.click();
+                    }
+                }
+            });
+            
+            // Form submission
+            if (bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you! We will contact you shortly to confirm your booking.');
+                    bookingForm.reset();
+                });
+            }
+            
+            // Auto-play when video is visible (optional)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+                        // Optional: auto-play when video is mostly visible
+                        // Uncomment if you want auto-play
+                        // video.play();
+                        // playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            if (video) {
+                observer.observe(video);
+            }
+        });
+    </script>
+</body>
+</html>

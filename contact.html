@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Veetech Tech Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        /* Contact Page Specific Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(10, 31, 58, 0.9), rgba(10, 31, 58, 0.9)),
+                        url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1600&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffcc00;
+        }
+        
+        .page-header p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e6e6e6;
+        }
+        
+        .contact-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        
+        .contact-info h2,
+        .contact-form h2 {
+            color: #0a1f3a;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact-info h2::after,
+        .contact-form h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #ffcc00;
+        }
+        
+        .contact-details {
+            margin-top: 40px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: #0a1f3a;
+            color: #ffcc00;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-text h3 {
+            color: #0a1f3a;
+            margin-bottom: 5px;
+            font-size: 1.3rem;
+        }
+        
+        .contact-text p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .contact-text a {
+            color: #0a1f3a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .contact-text a:hover {
+            color: #ffcc00;
+        }
+        
+        /* Contact Form */
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #0a1f3a;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #ffcc00;
+            box-shadow: 0 0 0 3px rgba(255, 204, 0, 0.1);
+        }
+        
+        .contact-form .button {
+            background: #ffcc00;
+            color: #0a1f3a;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            width: 100%;
+        }
+        
+        .contact-form .button:hover {
+            background: #e6b800;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 204, 0, 0.3);
+        }
+        
+        /* FAQ Section */
+        #faq {
+            margin: 80px 0;
+        }
+        
+        #faq h2 {
+            text-align: center;
+            color: #0a1f3a;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .faq-question {
+            padding: 25px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+        
+        .faq-question h3 {
+            color: #0a1f3a;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+        
+        .faq-question i {
+            color: #ffcc00;
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 25px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .faq-answer.active {
+            padding: 25px;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        /* Business Hours */
+        .business-hours {
+            background: #0a1f3a;
+            color: white;
+            padding: 60px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .business-hours h2 {
+            color: #ffcc00;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+        
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .day-slot {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .day {
+            color: #ffcc00;
+            font-weight: 500;
+        }
+        
+        .time {
+            color: #b0b0b0;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Enhanced Footer Styles */
+        .site-footer {
+            background: #0a1829;
+            color: white;
+            padding: 3rem 0 0;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-section h4 {
+            color: #ffcc00;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffcc00;
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: #ffcc00;
+            width: 20px;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: #ffcc00;
+            color: #0a1f3a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: #081220;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .changelog {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .changelog a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .changelog a:hover {
+            text-decoration: underline;
+        }
+
+        .changelog span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .copyright p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-form-container {
+                padding: 25px;
+            }
+            
+            .business-hours {
+                padding: 40px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Veetech</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>Contact Us</h1>
+            <p>Get in touch for all your tech solutions</p>
+        </section>
+
+        <section class="contact-content">
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p style="color: #666; line-height: 1.8; margin-bottom: 30px;">
+                        Have questions about our services? Need a repair quote? Want to purchase a device? 
+                        We're here to help! Reach out through any of the methods below.
+                    </p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Phone Number</h3>
+                                <p>Call us directly for immediate assistance</p>
+                                <a href="tel:0804436093">📞 0804 436 093</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Email Address</h3>
+                                <p>Send us an email for inquiries and support</p>
+                                <a href="mailto:info@veetech.com">✉️ info@veetech.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>WhatsApp</h3>
+                                <p>Chat with us on WhatsApp for quick responses</p>
+                                <a href="https://wa.me/234804436093" target="_blank">💬 Click to Chat</a>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-text">
+                                <h3>Location</h3>
+                                <p>Visit our repair center in Lagos</p>
+                                <a href="https://maps.google.com" target="_blank">📍 Lagos, Nigeria</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <h2>Send a Message</h2>
+                    <div class="contact-form-container">
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name">Full Name *</label>
+                                    <input type="text" id="name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number *</label>
+                                    <input type="tel" id="phone" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" id="email">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="service">Service Needed</label>
+                                <select id="service">
+                                    <option value="">Select a service</option>
+                                    <option>Phone Repair</option>
+                                    <option>Laptop Repair</option>
+                                    <option>Phone Purchase</option>
+                                    <option>Laptop Purchase</option>
+                                    <option>Power Bank Repair</option>
+                                    <option>Other Inquiry</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" rows="5" required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="button">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- FAQ Section -->
+            <div id="faq">
+                <h2>Frequently Asked Questions</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does a typical repair take?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most repairs are completed within 2-4 hours. Screen replacements and battery changes typically take 1-2 hours. Complex repairs like water damage may take 24-48 hours. We offer same-day service for most common repairs.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer warranty on repairs?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! All our repairs come with a 6-month warranty. If the same issue occurs within 6 months, we'll fix it for free. The warranty covers both parts and labor.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can you come to my location for repairs?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we offer pickup and delivery service within Lagos for an additional fee. For corporate clients, we provide on-site repair services. Contact us for a quote based on your location.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you sell original phone parts?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We use high-quality, grade-A replacement parts for all repairs. While we may not always have original manufacturer parts, we guarantee the quality and performance of all parts we install. We offer a range of options to suit different budgets.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How much does a phone screen replacement cost?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Prices vary by phone model. Basic smartphone screens start from ₦15,000, while flagship models may cost ₦30,000-₦50,000. Contact us with your phone model for an exact quote.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Business Hours -->
+            <div class="business-hours">
+                <h2>Business Hours</h2>
+                <div class="hours-grid">
+                    <div class="day-slot">
+                        <span class="day">Monday - Friday</span>
+                        <span class="time">9:00 AM - 7:00 PM</span>
+                    </div>
+                    <div class="day-slot">
+                        <span class="day">Saturday</span>
+                        <span class="time">9:00 AM - 6:00 PM</span>
+                    </div>
+                    <div class="day-slot">
+                        <span class="day">Sunday</span>
+                        <span class="time">10:00 AM - 4:00 PM</span>
+                    </div>
+                    <div class="day-slot">
+                        <span class="day">Public Holidays</span>
+                        <span class="time">10:00 AM - 3:00 PM</span>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; color: #b0b0b0; font-style: italic;">
+                    Emergency repair services available outside business hours - call us anytime!
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/234804436093" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Enhanced Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Veetech</h3>
+                <p>Your trusted partner for all tech solutions in Nigeria. Professional repairs and quality products.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/234804436093" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Features</h4>
+                <ul>
+                    <li><a href="services.html">Phone Repairs</a></li>
+                    <li><a href="services.html">Laptop Repairs</a></li>
+                    <li><a href="products.html">Smartphone Sales</a></li>
+                    <li><a href="products.html">Laptop Sales</a></li>
+                    <li><a href="products.html">Power Banks</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Pricing</h4>
+                <ul>
+                    <li><a href="services.html#pricing">Repair Services</a></li>
+                    <li><a href="products.html#pricing">Phone Prices</a></li>
+                    <li><a href="products.html#pricing">Laptop Prices</a></li>
+                    <li><a href="services.html#warranty">Warranty Info</a></li>
+                    <li><a href="services.html#discounts">Special Offers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> 0804 436 093</li>
+                    <li><i class="fas fa-envelope"></i> info@veetech.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 9am-7pm</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html#faq">FAQ</a></li>
+                    <li><a href="contact.html#support">Customer Support</a></li>
+                    <li><a href="report-bug.html">Report Bug</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="changelog">
+                    <a href="changelog.html">Changelog v2.0</a>
+                    <span>• Last updated: March 2024</span>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2024 Veetech Tech Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // FAQ Accordion
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Close all other answers
+                    document.querySelectorAll('.faq-answer').forEach(item => {
+                        if (item !== answer) {
+                            item.classList.remove('active');
+                            item.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                        }
+                    });
+                    
+                    // Toggle current answer
+                    answer.classList.toggle('active');
+                    
+                    // Rotate icon
+                    if (answer.classList.contains('active')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will contact you within 24 hours.');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

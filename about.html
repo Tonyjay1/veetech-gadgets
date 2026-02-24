@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Veetech Tech Solutions</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <style>
+        /* About Page Specific Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-header {
+            background: linear-gradient(rgba(10, 31, 58, 0.9), rgba(10, 31, 58, 0.9)),
+                        url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&h=600&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: #ffcc00;
+        }
+        
+        .page-header p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: #e6e6e6;
+        }
+        
+        .about-content {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .story-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 80px;
+        }
+        
+        .story-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .story-text h2 {
+            color: #0a1f3a;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .story-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: #ffcc00;
+        }
+        
+        .story-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        
+        .values-section {
+            margin-bottom: 80px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .value-card {
+            text-align: center;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .value-card i {
+            font-size: 3.5rem;
+            color: #0a1f3a;
+            margin-bottom: 25px;
+            display: block;
+        }
+        
+        .value-card h3 {
+            color: #0a1f3a;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .value-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .team-section {
+            margin-bottom: 80px;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .member-info {
+            padding: 30px;
+        }
+        
+        .member-info h3 {
+            color: #0a1f3a;
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .member-info .role {
+            color: #ffcc00;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .member-info p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            background: #128C7E;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Enhanced Footer Styles */
+        .site-footer {
+            background: #0a1829;
+            color: white;
+            padding: 3rem 0 0;
+            margin-top: 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #ffcc00;
+            font-size: 1.8rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+
+        .footer-section h4 {
+            color: #ffcc00;
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .footer-section p {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .footer-section ul li a:hover {
+            color: #ffcc00;
+            padding-left: 5px;
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #b0b0b0;
+            font-size: 0.95rem;
+        }
+
+        .contact-info i {
+            color: #ffcc00;
+            width: 20px;
+            font-size: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            background: #ffcc00;
+            color: #0a1f3a;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            background: #081220;
+            margin-top: 3rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .changelog {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .changelog a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .changelog a:hover {
+            text-decoration: underline;
+        }
+
+        .changelog span {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .copyright p {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .story-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .values-grid,
+            .team-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .values-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .whatsapp-float {
+                width: 50px;
+                height: 50px;
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-section {
+                text-align: center;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .contact-info li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Veetech</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <h1>About Veetech</h1>
+            <p>Your trusted tech partner in Nigeria since 2018</p>
+        </section>
+
+        <section class="about-content">
+            <div class="story-section">
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop" alt="Our Tech Shop">
+                </div>
+                <div class="story-text">
+                    <h2>Our Story</h2>
+                    <p>Founded in 2018, Veetech started as a small repair shop in Lagos with a passion for technology and a commitment to solving people's tech problems. What began as a one-person operation has grown into a trusted brand serving thousands of customers across Nigeria.</p>
+                    <p>We recognized the growing need for reliable tech solutions in Nigeria - where access to quality repairs and affordable devices was often a challenge. Our mission was clear: provide professional, affordable, and trustworthy tech services to everyone.</p>
+                    <p>Today, we've expanded to offer comprehensive tech solutions including device repairs, sales of smartphones and laptops, power banks, and expert tech consultations. Our team of certified technicians brings years of experience and training to every job.</p>
+                </div>
+            </div>
+
+            <div class="values-section">
+                <h2 style="text-align: center; color: #0a1f3a; font-size: 2.5rem; margin-bottom: 20px;">Our Values</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; color: #666; font-size: 1.1rem;">
+                    These principles guide everything we do at Veetech
+                </p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Trust & Reliability</h3>
+                        <p>We stand behind every repair with a 6-month warranty and provide honest assessments before any work begins.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-handshake"></i>
+                        <h3>Customer First</h3>
+                        <p>Your satisfaction is our priority. We listen, understand your needs, and deliver solutions that work for you.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-bolt"></i>
+                        <h3>Fast Service</h3>
+                        <p>Most repairs completed within 24 hours. We value your time and work efficiently without compromising quality.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3>Expert Knowledge</h3>
+                        <p>Our technicians are constantly trained on the latest technology and repair techniques.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-tags"></i>
+                        <h3>Affordable Pricing</h3>
+                        <p>Transparent pricing with no hidden costs. We provide quality service at fair prices.</p>
+                    </div>
+                    
+                    <div class="value-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Nationwide Reach</h3>
+                        <p>Serving customers across Nigeria with pickup/delivery options and remote support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="team-section">
+                <h2 style="text-align: center; color: #0a1f3a; font-size: 2.5rem; margin-bottom: 20px;">Meet Our Team</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 50px; color: #666; font-size: 1.1rem;">
+                    The skilled professionals behind Veetech's success
+                </p>
+                
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop" alt="Victor Emmanuel">
+                        <div class="member-info">
+                            <h3>Victor Emmanuel</h3>
+                            <span class="role">Founder & CEO</span>
+                            <p>With 10+ years in tech repair and a passion for innovation, Victor leads our team with vision and expertise.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop" alt="Sarah Johnson">
+                        <div class="member-info">
+                            <h3>Sarah Johnson</h3>
+                            <span class="role">Head Technician</span>
+                            <p>Certified in mobile and laptop repairs with 8 years experience in complex device diagnostics.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005-128?w=400&h=400&fit=crop" alt="Michael Adebayo">
+                        <div class="member-info">
+                            <h3>Michael Adebayo</h3>
+                            <span class="role">Customer Support</span>
+                            <p>Dedicated to ensuring every customer has an exceptional experience with Veetech.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/234804436093" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Enhanced Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Veetech</h3>
+                <p>Your trusted partner for all tech solutions in Nigeria. Professional repairs and quality products.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://wa.me/234804436093" target="_blank" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Features</h4>
+                <ul>
+                    <li><a href="services.html">Phone Repairs</a></li>
+                    <li><a href="services.html">Laptop Repairs</a></li>
+                    <li><a href="products.html">Smartphone Sales</a></li>
+                    <li><a href="products.html">Laptop Sales</a></li>
+                    <li><a href="products.html">Power Banks</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Pricing</h4>
+                <ul>
+                    <li><a href="services.html#pricing">Repair Services</a></li>
+                    <li><a href="products.html#pricing">Phone Prices</a></li>
+                    <li><a href="products.html#pricing">Laptop Prices</a></li>
+                    <li><a href="services.html#warranty">Warranty Info</a></li>
+                    <li><a href="services.html#discounts">Special Offers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul class="contact-info">
+                    <li><i class="fas fa-phone"></i> 0804 436 093</li>
+                    <li><i class="fas fa-envelope"></i> info@veetech.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Lagos, Nigeria</li>
+                    <li><i class="fas fa-clock"></i> Mon-Sat: 9am-7pm</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html#faq">FAQ</a></li>
+                    <li><a href="contact.html#support">Customer Support</a></li>
+                    <li><a href="report-bug.html">Report Bug</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="changelog">
+                    <a href="changelog.html">Changelog v2.0</a>
+                    <span>• Last updated: March 2024</span>
+                </div>
+                <div class="copyright">
+                    <p>&copy; 2024 Veetech Tech Solutions. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Simple JavaScript for interactive elements if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('About page loaded successfully!');
+            
+            // Add any interactive functionality here if needed
+            const valueCards = document.querySelectorAll('.value-card');
+            
+            valueCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.boxShadow = '0 10px 30px rgba(0,0,0,0.08)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
