@@ -1,35 +1,790 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services | Veetech</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --dark-blue: #0a1f3a;
+            --yellow: ;#ffcc00
+            --primary: #2563eb;
+            --primary-dark: ##0a1f3a;
+            --secondary: #0f172a;
+            --accent: #ffcc00;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+            --dark-gray: #475569;
+            --success: #10b981;
+        }
+
+        body {
+            background-color: #f1f5f9;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--secondary), #1e293b);
+            color: white;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 0;
+        }
+
+        nav a:hover, nav a.active {
+            color: white;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .header-icons i {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .header-icons i:hover {
+            color: var(--accent);
+        }
+
+        .cart-count {
+            background: var(--accent);
+            color: white;
+            font-size: 0.7rem;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -5px;
+            right: -8px;
+        }
+
+        .cart-icon {
+            position: relative;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--dark-gray);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Services Section */
+        .services-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .services-intro h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .services-intro p {
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .service-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .service-content {
+            padding: 2rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .service-content p {
+            color: var(--dark-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-features li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            color: var(--dark-gray);
+        }
+
+        .service-features i {
+            color: var(--success);
+            margin-right: 0.7rem;
+            font-size: 0.9rem;
+        }
+
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .service-price span {
+            font-size: 1rem;
+            font-weight: normal;
+            color: var(--gray);
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--gray);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Repair Process Section */
+        .process-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 4rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .process-section h2 {
+            text-align: center;
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
+            font-size: 2.2rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            counter-reset: step-counter;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            padding: 2rem 1rem;
+        }
+
+        .process-step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .step-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .process-step h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .process-step p {
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--secondary), #1e293b);
+            border-radius: 20px;
+            color: white;
+            margin-bottom: 4rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: #cbd5e1;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: transform 0.3s, background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #7c3aed;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary);
+            color: #cbd5e1;
+            padding: 3rem 5% 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .contact-info i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-actions {
+                flex-direction: column;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Veetech</h1>
+        <a href="index.html" class="logo">
+            <i class="fas fa-microchip"></i>
+            Veetech
+        </a>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="about.html">About</a>
-            <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html" class="active">Services</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
         </nav>
+        <div class="header-icons">
+            <i class="fas fa-search"></i>
+            <i class="fas fa-user"></i>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">3</span>
+            </div>
+        </div>
     </header>
 
-    <main style="padding: 4rem 2rem; max-width: 800px; margin: auto;">
-        <h2>Our Services</h2>
-        <ul>
-            <li><strong>Phone Repair:</strong> Screen, battery, software</li>
-            <li><strong>Laptop Repair:</strong> Hardware, software, upgrades</li>
-            <li><strong>Power Bank Repair:</strong> Battery, circuit, ports</li>
-            <li><strong>Sales:</strong> Phones, laptops, power banks, accessories</li>
-        </ul>
-        <a href="index.html" class="button">Back to Home</a>
+    <!-- Main Content -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Our Professional Services</h1>
+            <p>Comprehensive tech solutions for all your devices. From repairs to sales, we've got you covered with expert service and quality products.</p>
+        </div>
+
+        <!-- Services Intro -->
+        <section class="services-intro">
+            <h2>Why Choose Veetech Services?</h2>
+            <p>With over 10 years of experience in the tech industry, we provide reliable, affordable, and high-quality services for all your electronic devices. Our certified technicians use genuine parts and the latest tools to ensure your devices work like new.</p>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="services-grid">
+            <!-- Phone Repair -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="service-content">
+                    <h3><i class="fas fa-screwdriver"></i> Phone Repair</h3>
+                    <p>Expert repair services for all smartphone brands and models. We fix everything from cracked screens to complex motherboard issues.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Screen replacement & digitizer repair</li>
+                        <li><i class="fas fa-check"></i> Battery replacement with warranty</li>
+                        <li><i class="fas fa-check"></i> Software issues & OS updates</li>
+                        <li><i class="fas fa-check"></i> Water damage restoration</li>
+                        <li><i class="fas fa-check"></i> Charging port & button repairs</li>
+                        <li><i class="fas fa-check"></i> Camera & speaker replacements</li>
+                    </ul>
+                    <div class="service-price">From $49 <span>depending on model</span></div>
+                    <div class="service-actions">
+                        <a href="contact.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt"></i> Book Service
+                        </a>
+                        <a href="tel:0804436093" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Laptop Repair -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <div class="service-content">
+                    <h3><i class="fas fa-tools"></i> Laptop Repair</h3>
+                    <p>Complete laptop repair and upgrade services for all brands. We handle hardware issues, software problems, and performance upgrades.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Screen replacement & hinge repair</li>
+                        <li><i class="fas fa-check"></i> Motherboard diagnostics & repair</li>
+                        <li><i class="fas fa-check"></i> Virus removal & OS installation</li>
+                        <li><i class="fas fa-check"></i> RAM & SSD upgrades</li>
+                        <li><i class="fas fa-check"></i> Keyboard & trackpad replacement</li>
+                        <li><i class="fas fa-check"></i> Overheating & fan issues</li>
+                    </ul>
+                    <div class="service-price">From $79 <span>depending on issue</span></div>
+                    <div class="service-actions">
+                        <a href="contact.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt"></i> Book Service
+                        </a>
+                        <a href="tel:0804436093" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Power Bank Repair -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-battery-full"></i>
+                </div>
+                <div class="service-content">
+                    <h3><i class="fas fa-bolt"></i> Power Bank Repair</h3>
+                    <p>Specialized repair services for all types of power banks and portable chargers. We restore charging capacity and fix circuit issues.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Battery cell replacement</li>
+                        <li><i class="fas fa-check"></i> Circuit board repair</li>
+                        <li><i class="fas fa-check"></i> USB port & cable replacement</li>
+                        <li><i class="fas fa-check"></i> Charging capacity restoration</li>
+                        <li><i class="fas fa-check"></i> LED indicator fixes</li>
+                        <li><i class="fas fa-check"></i> Water damage repair</li>
+                    </ul>
+                    <div class="service-price">From $29 <span>depending on capacity</span></div>
+                    <div class="service-actions">
+                        <a href="contact.html" class="btn btn-primary">
+                            <i class="fas fa-calendar-alt"></i> Book Service
+                        </a>
+                        <a href="tel:0804436093" class="btn btn-secondary">
+                            <i class="fas fa-phone"></i> Call Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Device Sales -->
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="service-content">
+                    <h3><i class="fas fa-tags"></i> Device Sales</h3>
+                    <p>Purchase brand new and certified pre-owned devices with warranty. We offer the latest smartphones, laptops, and accessories.</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Latest smartphones & tablets</li>
+                        <li><i class="fas fa-check"></i> High-performance laptops</li>
+                        <li><i class="fas fa-check"></i> Power banks & portable chargers</li>
+                        <li><i class="fas fa-check"></i> Phone cases & screen protectors</li>
+                        <li><i class="fas fa-check"></i> Chargers & cables</li>
+                        <li><i class="fas fa-check"></i> Headphones & accessories</li>
+                    </ul>
+                    <div class="service-price">Visit Store <span>for latest prices</span></div>
+                    <div class="service-actions">
+                        <a href="index.html" class="btn btn-primary">
+                            <i class="fas fa-store"></i> View Products
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary">
+                            <i class="fas fa-info-circle"></i> Inquire
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Repair Process -->
+        <section class="process-section">
+            <h2>Our Simple Repair Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <h3>Diagnosis</h3>
+                    <p>We thoroughly diagnose your device to identify the exact issue and provide a transparent quote.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Repair</h3>
+                    <p>Our certified technicians repair your device using genuine parts and industry-best practices.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Testing</h3>
+                    <p>Every repaired device undergoes rigorous testing to ensure it meets our quality standards.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Warranty</h3>
+                    <p>We provide warranty on all repairs and parts for your peace of mind.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <h2>Ready to Fix Your Device?</h2>
+            <p>Don't let a broken device disrupt your life. Contact us today for fast, reliable, and affordable repair services. Our team is ready to help you get back to normal as quickly as possible.</p>
+            <a href="contact.html" class="cta-button">
+                <i class="fas fa-calendar-check"></i> Schedule a Repair
+            </a>
+        </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <p>📞 0804436093 | ✉️ info@veetech.com</p>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Veetech</h3>
+                <p>Your trusted partner for all tech repair and sales needs. Quality service, genuine parts, and customer satisfaction guaranteed.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="index.html">Products</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Silicon Valley, CA</p>
+                    <p><i class="fas fa-phone"></i> 0804436093</p>
+                    <p><i class="fas fa-envelope"></i> info@veetech.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sat: 9:00 AM - 7:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for tech tips, promotions, and service updates.</p>
+                <div style="display: flex; margin-top: 1rem;">
+                    <input type="email" placeholder="Your email" style="flex: 1; padding: 0.8rem; border: none; border-radius: 5px 0 0 5px; font-size: 0.9rem;">
+                    <button style="background: var(--primary); color: white; border: none; padding: 0 1.2rem; border-radius: 0 5px 5px 0; cursor: pointer;">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 Veetech. All rights reserved. | Professional Tech Repair Services</p>
+        </div>
     </footer>
+
+    <script>
+        // Simple interactivity
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click animations to service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    if (!e.target.closest('.btn')) {
+                        this.style.transform = 'scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+            
+            // Newsletter form submission
+            const newsletterForm = document.querySelector('.footer-section form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        alert('Thank you for subscribing to our newsletter!');
+                        this.querySelector('input[type="email"]').value = '';
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
